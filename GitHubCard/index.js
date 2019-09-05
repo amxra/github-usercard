@@ -53,3 +53,45 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+
+// Solution 
+
+
+
+function getGithubData() {
+  axios.get('https://api.github.com/users/amxra')
+  // .then(response => {
+  //   document.body.innerText = response.data.name;
+  // })
+  // .catch(error => {
+  //   document.body.innerText = error.message;
+  // });
+}
+
+
+
+function gitHubPromise(data){
+
+  const cardDiv = document.createElement('div');
+    cardDiv.classList.add('card');
+  const userImage = document.createElement('img');
+  const cardInfoDiv = document.createElement('div');
+    cardInfoDiv.classList.add('card-info');
+  const newHeader = document.createElement('h3');
+    newHeader.classList.add = 'name'
+  const paragraphOne = document.createElement('p');
+    paragraphOne.classList.add('username');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const newLink = document.createElement('a');
+  const paragraphFour = document.createElement('p');
+  const paragraphFive = document.createElement('p');
+  const paragraphSix = document.createElement('p');
+
+  
+
+}
+
+
+

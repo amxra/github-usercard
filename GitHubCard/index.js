@@ -53,3 +53,103 @@ const followersArray = [];
   luishrd
   bigknell
 */
+
+
+// Solution 
+
+function gitHubCardMaker(user){
+
+  const cardDiv = document.createElement('div');
+    cardDiv.classList.add('card');
+  const userImage = document.createElement('img');
+  const cardInfoDiv = document.createElement('div');
+    cardInfoDiv.classList.add('card-info');
+  const newHeader = document.createElement('h3');
+    newHeader.classList.add = 'name'
+  const paragraphOne = document.createElement('p');
+    paragraphOne.classList.add('username');
+  const paragraphTwo = document.createElement('p');
+  const paragraphThree = document.createElement('p');
+  const newLink = document.createElement('a');
+  const paragraphFour = document.createElement('p');
+  const paragraphFive = document.createElement('p');
+  const paragraphSix = document.createElement('p');
+  const button = document.createElement('button')
+
+  userImage.setAttribute('src', 'data[avatar-url');
+  newHeader.textContent = 'data.name';
+  paragraphOne.textContent = 'data.login';
+  paragraphTwo.textContent = '`Location: ${data.location}`'
+  paragraphThree.textContent = '`Profile: ${data[html-url]}'
+  newLink.href = 'data[html-url'
+  paragraphFour.textContent = '`Followers: ${data.followers}`'
+  paragraphFive.textContent = '`Following: ${data.following}`'
+  paragraphSix.textContent = '`Bio: ${data.following}'
+  button.textContent = 'click';
+
+  //Append
+
+  cardDiv.appendChild(userImage);
+  cardDiv.appendChild(cardInfoDiv);
+
+  cardInfoDiv.appendChild(newHeader);
+  cardInfoDiv.appendChild(paragraphOne);
+  cardInfoDiv.appendChild(paragraphTwo);
+  cardInfoDiv.appendChild(paragraphThree);
+  cardInfoDiv.appendChild(paragraphFour);
+  cardInfoDiv.appendChild(paragraphFive);
+  cardInfoDiv.appendChild(paragraphSix);
+
+  paragraphThree.appendChild(newLink);
+
+  button.addEventListener('click', ()=>{
+    cardDiv.classList.toggle('expand');
+  })
+
+  console.log(cardDiv)
+  return cardDiv
+
+}
+
+
+// function newCard(user){
+//   axios.get('https://api.github.com/users/amxra')
+// }
+
+
+function newCard(user) {
+  axios({
+    method: 'get',
+    url: `https://api.github.com/users/${user}`
+  })
+    .then(user => {
+      let userCard = githubCardMaker(user);
+      document.querySelector('.cards').appendChild(userCard)
+    })
+    .catch(err => {
+      return err
+    })
+}
+
+newCard('amxra');
+
+//Manually add followers 
+
+// Add Followers Manual
+// followersArray.forEach(user => {
+//   newCard(user)
+// })
+
+
+//Programmatically add followers 
+
+axios.get('https://api.github.com/users/amxra/followers')
+.then(response => {
+  let followers = response.data
+  followers.forEach(follower => {
+    newCard(follower.login)
+  })
+})
+.catch(err => {
+  return err
+})
